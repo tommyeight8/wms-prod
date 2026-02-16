@@ -11,6 +11,9 @@ COPY . .
 
 RUN pnpm install --frozen-lockfile
 
+# Dummy URL for prisma generate (doesn't connect, just generates client)
+ENV DIRECT_URL="postgresql://dummy:dummy@localhost:5432/dummy"
+
 RUN pnpm --filter @wms/db exec prisma generate
 
 RUN pnpm --filter @wms/types build
