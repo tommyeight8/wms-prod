@@ -120,10 +120,9 @@ const productRepoAdapter = {
 // ============================================================================
 
 const productService = new ProductService({
-  productRepo: productRepoAdapter,
+  productRepo: productRepoAdapter as any,
   inventoryRepo: inventoryQueryRepo,
 });
-
 // ============================================================================
 // Routes
 // ============================================================================
