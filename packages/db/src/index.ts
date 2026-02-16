@@ -48,16 +48,19 @@ export {
   OrderPackageStatus,
 
   // Receiving
-  ReceivingSessionStatus,
-  ReceivingLineStatus,
+  ReceivingStatus,
   ReceivingExceptionType,
-  ReceivingExceptionStatus,
 
   // Cycle Count
+  CycleCountType,
   CycleCountTaskStatus,
   CycleCountSessionStatus,
   CycleCountLineStatus,
+  AdjustmentReason,
   AdjustmentStatus,
+
+  // Shipping
+  ShippingLabelStatus,
 
   // Invoice
   InvoiceStatus,
