@@ -22,43 +22,43 @@ export async function authRoutes(app: FastifyInstance) {
     },
   };
 
-  app.post("/signup", authRateLimit, async (request, reply) => {
-    const body = z
-      .object({
-        name: z.string().min(1),
-        email: z.string().email(),
-        password: z.string().min(8),
-      })
-      .parse(request.body);
+  // app.post("/signup", authRateLimit, async (request, reply) => {
+  //   const body = z
+  //     .object({
+  //       name: z.string().min(1),
+  //       email: z.string().email(),
+  //       password: z.string().min(8),
+  //     })
+  //     .parse(request.body);
 
-    // Check if user exists
-    const existing = await prisma.user.findUnique({
-      where: { email: body.email },
-    });
+  //   // Check if user exists
+  //   const existing = await prisma.user.findUnique({
+  //     where: { email: body.email },
+  //   });
 
-    if (existing) {
-      return reply.status(409).send({
-        error: { code: "USER_EXISTS", message: "Email already registered" },
-      });
-    }
+  //   if (existing) {
+  //     return reply.status(409).send({
+  //       error: { code: "USER_EXISTS", message: "Email already registered" },
+  //     });
+  //   }
 
-    // Create user
-    const user = await prisma.user.create({
-      data: {
-        name: body.name,
-        email: body.email,
-        password: await hashPassword(body.password),
-      },
-    });
+  //   // Create user
+  //   const user = await prisma.user.create({
+  //     data: {
+  //       name: body.name,
+  //       email: body.email,
+  //       password: await hashPassword(body.password),
+  //     },
+  //   });
 
-    return reply.status(201).send({
-      user: {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-      },
-    });
-  });
+  //   return reply.status(201).send({
+  //     user: {
+  //       id: user.id,
+  //       email: user.email,
+  //       name: user.name,
+  //     },
+  //   });
+  // });
 
   app.post("/login", authRateLimit, async (request, reply) => {
     const body = LoginSchema.parse(request.body);
